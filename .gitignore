@@ -1,0 +1,10 @@
+*.elc
+\#*
+*~
+elpa
+eshell
+auto-save-list
+bookmarks
+server
+ido.last
+.emacs.desktop
