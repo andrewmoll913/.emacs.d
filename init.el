@@ -78,7 +78,7 @@
   :ensure t
   :config
   (progn
-    (global-set-key (kbd "M-p") 'ace-window)
+    (global-set-key (kbd "C-x o") 'ace-window)
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))))
 
 (defun push-mark-no-activate ()
@@ -137,7 +137,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (counsel org-bullets which-key try use-package ace-window ivy swiper avy magit alchemist))))
+    (ox-asciidoc erlang auto-overlays counsel org-bullets which-key try use-package ace-window ivy swiper avy magit alchemist))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
