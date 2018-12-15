@@ -24,7 +24,9 @@
 (use-package alchemist
   :ensure t
   :config
-  (setq alchemist-project-compile-when-needed t))
+  (progn
+    (setq alchemist-project-compile-when-needed t)
+    (define-key elixir-mode-map (kbd "C-c a i t") 'alchemist-iex-reload)))
 
 (use-package org-bullets
   :ensure t
@@ -41,6 +43,9 @@
     (global-set-key (kbd "C-x g") 'magit-status)
     (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)))
 
+(use-package php-mode
+  :ensure t)
+ 
 (use-package swiper
   :ensure t
   :config
@@ -70,8 +75,8 @@
   :ensure t
   :config
   (progn
-    (global-set-key (kbd "C-:") 'avy-goto-char)
-    (global-set-key (kbd "C-'") 'avy-goto-char-2)
+    (global-set-key (kbd "C-;") 'avy-goto-char)
+    (global-set-key (kbd "C-:") 'avy-goto-char-2)
     (global-set-key (kbd "M-g f") 'avy-goto-line)
     (global-set-key (kbd "M-g e") 'avy-goto-word)))
 
@@ -102,7 +107,14 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-
+(defun alchemist-iex-reload (&optional arg)
+  (interactive "P")
+  (when (buffer-live-p alchemist-iex-buffer)
+    (kill-process (get-buffer-process alchemist-iex-buffer))
+    (sleep-for 1)
+    (if arg
+	(call-interactively 'alchemist-iex-project-run)
+      (call-interactively 'alchemist-iex-run))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -110,6 +122,7 @@
  ;; If there is more than one, they won't work right.
  '(alchemist-company-show-annotation t)
  '(desktop-save-mode nil)
+ '(erldoc-man-index "file:///c:/Program%20Files/erl9.0/doc/man_index.html")
  '(ibuffer-saved-filter-groups
    (quote
     (("tutor"
@@ -138,10 +151,11 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (ox-asciidoc erlang auto-overlays counsel org-bullets which-key try use-package ace-window ivy swiper avy magit alchemist))))
+    (php-mode org-journal ox-asciidoc erlang auto-overlays counsel org-bullets which-key try use-package ace-window ivy swiper avy magit alchemist)))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Go" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
