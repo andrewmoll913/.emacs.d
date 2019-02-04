@@ -21,6 +21,20 @@
   :config
   (which-key-mode))
 
+(use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-engines-alist
+	'(("elixir"  . "\\.html.eex\\'")))
+  (setq web-mode-ac-sources-alist
+	'(("css" . (ac-source-css-property))
+	  ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+  (setq web-mode-enable-auto-closing t))
+
+(use-package impatient-mode
+  :ensure t)
+
 (use-package alchemist
   :ensure t
   :config
@@ -151,7 +165,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (php-mode org-journal ox-asciidoc erlang auto-overlays counsel org-bullets which-key try use-package ace-window ivy swiper avy magit alchemist)))
+    (impatient-mode web-mode php-mode org-journal ox-asciidoc erlang auto-overlays counsel org-bullets which-key try use-package ace-window ivy swiper avy magit alchemist)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
